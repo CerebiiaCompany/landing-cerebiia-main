@@ -1,0 +1,278 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Cerebiia S.A.S — design system
+ * Paleta "Cerebiia Neón": fondo #0a0a1a, superficie #0e1b3d,
+ * acento cian #2dd4f5, acento magenta #b026ff (todo en oklch).
+ * Tipografía: Sora (títulos) + Manrope (cuerpo).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-magenta: var(--brand-magenta);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Modo claro: misma armonía cian/azul/magenta sobre superficies claras */
+:root {
+  --radius: 1rem;
+  --background: oklch(0.985 0.006 250);
+  --foreground: oklch(0.22 0.045 268);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.045 268);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.045 268);
+  --primary: oklch(0.55 0.14 235);
+  --primary-foreground: oklch(0.99 0.004 250);
+  --secondary: oklch(0.94 0.018 250);
+  --secondary-foreground: oklch(0.24 0.045 268);
+  --muted: oklch(0.95 0.014 250);
+  --muted-foreground: oklch(0.46 0.035 262);
+  --accent: oklch(0.5 0.24 305);
+  --accent-foreground: oklch(0.99 0.004 250);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0.004 250);
+  --border: oklch(0.24 0.045 268 / 14%);
+  --input: oklch(0.24 0.045 268 / 20%);
+  --ring: oklch(0.55 0.14 235);
+  --surface: oklch(0.97 0.012 250);
+  --surface-foreground: oklch(0.22 0.045 268);
+  --brand-cyan: oklch(0.52 0.12 215);
+  --brand-blue: oklch(0.5 0.19 264);
+  --brand-magenta: oklch(0.5 0.24 305);
+  --chart-1: oklch(0.52 0.12 215);
+  --chart-2: oklch(0.5 0.19 264);
+  --chart-3: oklch(0.5 0.24 305);
+  --chart-4: oklch(0.55 0.14 180);
+  --chart-5: oklch(0.55 0.19 330);
+  --sidebar: oklch(0.97 0.012 250);
+  --sidebar-foreground: oklch(0.22 0.045 268);
+  --sidebar-primary: oklch(0.55 0.14 235);
+  --sidebar-primary-foreground: oklch(0.99 0.004 250);
+  --sidebar-accent: oklch(0.94 0.018 250);
+  --sidebar-accent-foreground: oklch(0.24 0.045 268);
+  --sidebar-border: oklch(0.24 0.045 268 / 14%);
+  --sidebar-ring: oklch(0.55 0.14 235);
+}
+
+/* Modo oscuro (predeterminado) */
+.dark {
+  --background: oklch(0.145 0.032 274);
+  --foreground: oklch(0.97 0.008 250);
+  --card: oklch(0.213 0.055 268);
+  --card-foreground: oklch(0.97 0.008 250);
+  --popover: oklch(0.213 0.055 268);
+  --popover-foreground: oklch(0.97 0.008 250);
+  --primary: oklch(0.8 0.135 205);
+  --primary-foreground: oklch(0.16 0.04 268);
+  --secondary: oklch(0.26 0.06 268);
+  --secondary-foreground: oklch(0.97 0.008 250);
+  --muted: oklch(0.24 0.05 268);
+  --muted-foreground: oklch(0.74 0.03 250);
+  --accent: oklch(0.55 0.27 305);
+  --accent-foreground: oklch(0.98 0.005 250);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 250);
+  --border: oklch(0.98 0.01 250 / 12%);
+  --input: oklch(0.98 0.01 250 / 16%);
+  --ring: oklch(0.8 0.135 205);
+  --surface: oklch(0.24 0.07 268);
+  --surface-foreground: oklch(0.97 0.008 250);
+  --brand-cyan: oklch(0.83 0.14 200);
+  --brand-blue: oklch(0.55 0.2 264);
+  --brand-magenta: oklch(0.58 0.27 305);
+  --chart-1: oklch(0.83 0.14 200);
+  --chart-2: oklch(0.55 0.2 264);
+  --chart-3: oklch(0.58 0.27 305);
+  --chart-4: oklch(0.72 0.16 180);
+  --chart-5: oklch(0.68 0.2 330);
+  --sidebar: oklch(0.19 0.045 268);
+  --sidebar-foreground: oklch(0.97 0.008 250);
+  --sidebar-primary: oklch(0.8 0.135 205);
+  --sidebar-primary-foreground: oklch(0.16 0.04 268);
+  --sidebar-accent: oklch(0.26 0.06 268);
+  --sidebar-accent-foreground: oklch(0.97 0.008 250);
+  --sidebar-border: oklch(0.98 0.01 250 / 12%);
+  --sidebar-ring: oklch(0.8 0.135 205);
+}
+
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Degradado de marca cian -> azul -> magenta (tomado del logo) */
+@utility brand-gradient-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--brand-cyan),
+    var(--brand-blue) 48%,
+    var(--brand-magenta)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn-solid {
+  background-image: linear-gradient(
+    100deg,
+    var(--brand-cyan),
+    var(--brand-blue) 50%,
+    var(--brand-magenta)
+  );
+}
+
+/* Tarjeta bento con superficie de vidrio y borde sutil */
+@utility bento {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  border: 1px solid var(--color-border);
+  background-color: color-mix(in oklab, var(--surface) 55%, transparent);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--brand-cyan) 45%, transparent);
+    box-shadow: 0 24px 60px -30px color-mix(in oklab, var(--brand-cyan) 55%, transparent);
+  }
+}
+
+@utility glow-cyan {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-cyan) 30%, transparent),
+    0 30px 80px -40px color-mix(in oklab, var(--brand-cyan) 70%, transparent);
+}
+
+@utility glow-magenta {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-magenta) 30%, transparent),
+    0 30px 80px -40px color-mix(in oklab, var(--brand-magenta) 70%, transparent);
+}
+
+@utility aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      40% 40% at 20% 20%,
+      color-mix(in oklab, var(--brand-cyan) 30%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 45% at 80% 30%,
+      color-mix(in oklab, var(--brand-magenta) 28%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 50% at 50% 90%,
+      color-mix(in oklab, var(--brand-blue) 28%, transparent),
+      transparent 70%
+    );
+  filter: blur(30px);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--brand-cyan) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--brand-cyan) 8%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Botones sólidos (sin degradados) */
+@utility btn-solid {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--primary) 86%, var(--foreground));
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility btn-outline {
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-foreground);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+}
