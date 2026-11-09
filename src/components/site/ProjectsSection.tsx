@@ -15,7 +15,7 @@ const staggerContainer: Variants = {
 };
 const PARTNERS = [
   { id: 1, name: "EnConcreto", image: "/enconcreto.png" },
-  { id: 2, name: "Aventuras", image: "/norte-aventuras.png" },
+  { id: 2, name: "Norte Aventuras", image: "/norte-aventuras.png" },
   { id: 3, name: "CENS", image: "/cens.png" },
   { id: 4, name: "Happy BPO", image: "/happy-bpo.png" },
   { id: 5, name: "ASCONFIT", image: "/asconfit.png" },
