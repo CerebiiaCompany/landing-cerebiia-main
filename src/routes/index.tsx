@@ -1,3 +1,4 @@
+import { ProjectsSection } from "@/components/site/ProjectsSection";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -12,9 +13,9 @@ import {
   Smartphone,
   Sparkles,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import logoStacked from "@/assets/cerebiia-logo-stacked.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,9 +91,25 @@ const PROCESS = [
   { step: "04", title: "Operación", text: "Despliegue, capacitación, monitoreo y evolución." },
 ];
 
+// --- Animaciones ---
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background ">
       <SiteHeader />
 
       <main>
@@ -100,23 +117,29 @@ function Index() {
         <section className="relative overflow-hidden">
           <div className="aurora opacity-70" aria-hidden />
           <div className="grid-lines absolute inset-0 opacity-40" aria-hidden />
-          <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-4 py-1.5 text-xs text-muted-foreground">
+          
+          <motion.div 
+            className="relative mx-auto max-w-7xl px-5 py-20 md:py-28"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-4 py-1.5 text-xs text-muted-foreground">
               <Sparkles className="size-3.5 text-brand-cyan" aria-hidden />
               Fábrica de software colombiana
-            </span>
+            </motion.span>
 
-            <h1 className="mt-6 max-w-4xl text-4xl leading-tight font-extrabold md:text-6xl">
+            <motion.h1 variants={fadeUp} className="mt-6 max-w-4xl text-4xl leading-tight font-extrabold md:text-6xl">
               Software a la medida que <span className="brand-gradient-text">piensa como su empresa</span>
-            </h1>
+            </motion.h1>
 
-            <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-lg text-muted-foreground">
               En Cerebiia S.A.S diseñamos, construimos y operamos plataformas para compañías que ya
               no caben en una hoja de cálculo. Cotice en línea, deje su guía de proyecto y hable con
               el equipo que lo va a construir.
-            </p>
+            </motion.p>
 
-            <div className="mt-9">
+            <motion.div variants={fadeUp} className="mt-9">
               <Link
                 to="/cotizar"
                 className="btn-solid group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
@@ -124,55 +147,68 @@ function Index() {
                 Cotizar mi proyecto en 2 minutos
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden />
               </Link>
-            </div>
+            </motion.div>
 
-            <dl className="mt-14 grid gap-4 sm:grid-cols-3">
+            <motion.dl variants={staggerContainer} className="mt-14 grid gap-4 sm:grid-cols-3">
               {[
                 { k: "Estimación inmediata", v: "Rango de inversión y tiempo al instante" },
                 { k: "Brief guiado", v: "Deje su guía sin reuniones previas" },
                 { k: "Ruta directa", v: "Los casos grandes llegan a dirección de desarrollo" },
               ].map((item) => (
-                <div key={item.k} className="bento p-5">
+                <motion.div variants={fadeUp} key={item.k} className="bento p-5">
                   <dt className="text-sm font-semibold text-brand-cyan">{item.k}</dt>
                   <dd className="mt-2 text-sm text-muted-foreground">{item.v}</dd>
-                </div>
+                </motion.div>
               ))}
-            </dl>
-          </div>
+            </motion.dl>
+          </motion.div>
         </section>
 
         {/* Bento de servicios */}
         <section className="mx-auto max-w-7xl px-5 py-16 md:py-24">
-          <h2 className="text-3xl font-bold md:text-4xl">Lo que construimos</h2>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Un equipo, varias capacidades. Combinamos producto, ingeniería y datos según lo que su
-            negocio necesita mover este trimestre.
-          </p>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
+            <motion.h2 variants={fadeUp} className="text-3xl font-bold md:text-4xl">Lo que construimos</motion.h2>
+            <motion.p variants={fadeUp} className="mt-3 max-w-2xl text-muted-foreground">
+              Un equipo, varias capacidades. Combinamos producto, ingeniería y datos según lo que su
+              negocio necesita mover este trimestre.
+            </motion.p>
 
-          <div className="mt-10 grid auto-rows-[minmax(150px,auto)] gap-4 md:grid-cols-4">
-            {SERVICES.map((service) => (
-              <article key={service.title} className={`bento flex flex-col p-6 ${service.span}`}>
-                <service.icon className="size-7 text-brand-cyan" aria-hidden />
-                <h3 className="mt-4 text-xl font-semibold">{service.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{service.text}</p>
-              </article>
-            ))}
-          </div>
+            <motion.div variants={staggerContainer} className="mt-10 grid auto-rows-[minmax(150px,auto)] gap-4 md:grid-cols-4">
+              {SERVICES.map((service) => (
+                <motion.article variants={fadeUp} key={service.title} className={`bento flex flex-col p-6 ${service.span}`}>
+                  <service.icon className="size-7 text-brand-cyan" aria-hidden />
+                  <h3 className="mt-4 text-xl font-semibold">{service.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{service.text}</p>
+                </motion.article>
+              ))}
+            </motion.div>
 
-          <div className="mt-6">
-            <Link
-              to="/servicios"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-cyan hover:underline"
-            >
-              Ver el detalle de cada servicio <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          </div>
+            <motion.div variants={fadeUp} className="mt-6">
+              <Link
+                to="/servicios"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-cyan hover:underline"
+              >
+                Ver el detalle de cada servicio <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Herramientas interactivas */}
         <section className="mx-auto max-w-7xl px-5 pb-16 md:pb-24">
-          <div className="grid gap-4 md:grid-cols-5">
-            <article className="bento glow-cyan relative flex flex-col justify-between p-8 md:col-span-3">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid gap-4 md:grid-cols-5"
+          >
+            <motion.article variants={fadeUp} className="bento glow-cyan relative flex flex-col justify-between p-8 md:col-span-3">
               <div>
                 <Gauge className="size-8 text-brand-cyan" aria-hidden />
                 <h2 className="mt-4 text-2xl font-bold md:text-3xl">
@@ -190,9 +226,9 @@ function Index() {
               >
                 Empezar mi cotización <ArrowRight className="size-4" aria-hidden />
               </Link>
-            </article>
+            </motion.article>
 
-            <article className="bento glow-magenta flex flex-col justify-between p-8 md:col-span-2">
+            <motion.article variants={fadeUp} className="bento glow-magenta flex flex-col justify-between p-8 md:col-span-2">
               <div>
                 <CalendarClock className="size-8 text-brand-magenta" aria-hidden />
                 <h2 className="mt-4 text-2xl font-bold">Agende una sesión</h2>
@@ -207,27 +243,43 @@ function Index() {
               >
                 Reservar cita <ArrowRight className="size-4" aria-hidden />
               </Link>
-            </article>
-          </div>
+            </motion.article>
+          </motion.div>
         </section>
-
+        
+        {/* Proyectos y Aliados */}
+        <ProjectsSection />
+        
         {/* Proceso */}
         <section className="mx-auto max-w-7xl px-5 pb-16 md:pb-24">
-          <h2 className="text-3xl font-bold md:text-4xl">Cómo trabajamos</h2>
-          <div className="mt-10 grid gap-4 md:grid-cols-4">
-            {PROCESS.map((item) => (
-              <article key={item.step} className="bento p-6">
-                <span className="brand-gradient-text text-3xl font-extrabold">{item.step}</span>
-                <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
-              </article>
-            ))}
-          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
+            <motion.h2 variants={fadeUp} className="text-3xl font-bold md:text-4xl">Cómo trabajamos</motion.h2>
+            <motion.div variants={staggerContainer} className="mt-10 grid gap-4 md:grid-cols-4">
+              {PROCESS.map((item) => (
+                <motion.article variants={fadeUp} key={item.step} className="bento p-6">
+                  <span className="brand-gradient-text text-3xl font-extrabold">{item.step}</span>
+                  <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
+                </motion.article>
+              ))}
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Cierre */}
         <section className="mx-auto max-w-7xl px-5 pb-20">
-          <div className="bento relative overflow-hidden p-8 md:p-14">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeUp}
+            className="bento relative overflow-hidden p-8 md:p-14"
+          >
             <div className="aurora opacity-60" aria-hidden />
             <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
               <div>
@@ -248,20 +300,20 @@ function Index() {
                   </Link>
                   <a
                     href="mailto:contacto@cerebiia.com"
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-secondary"
+                    className="btn-solid inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary"
                   >
                     Escribirnos
                   </a>
                 </div>
               </div>
               <img
-                src={logoStacked.url}
+                src="/logo.png"
                 alt="Marca de Cerebiia S.A.S"
                 className="mx-auto hidden w-48 md:block"
                 loading="lazy"
               />
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 

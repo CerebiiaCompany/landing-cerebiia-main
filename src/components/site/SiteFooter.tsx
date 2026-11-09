@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
-import mark from "@/assets/cerebiia-mark.png.asset.json";
+import mark from "/logo.png";
 
 export function SiteFooter() {
   return (
@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
-            <img src={mark.url} alt="Cerebiia S.A.S" className="h-9 w-auto" />
+            <img src="/logo.png" alt="Cerebiia S.A.S" className="h-10 w-auto" />
             <span className="text-lg font-extrabold tracking-[0.14em] text-foreground">
               CEREBIIA
             </span>
@@ -57,7 +57,7 @@ export function SiteFooter() {
             </li>
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 size-4 text-brand-cyan" aria-hidden />
-              <a href="https://wa.me/573000000000" className="hover:text-foreground">
+              <a href="https://wa.me/@Juan3s" className="hover:text-foreground">
                 WhatsApp comercial
               </a>
             </li>
