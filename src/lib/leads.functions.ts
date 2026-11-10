@@ -5,7 +5,7 @@ import { calculateEstimate } from "@/lib/estimate";
 import { assertStaff, createPublicServerClient } from "@/lib/leads.server";
 
 export const submitQuote = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => quoteSchema.parse(input))
+  .validator((input: unknown) => quoteSchema.parse(input))
   .handler(async ({ data }) => {
     const estimate = calculateEstimate({
       projectType: data.projectType,
@@ -44,7 +44,7 @@ export const submitQuote = createServerFn({ method: "POST" })
   });
 
 export const submitAppointment = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => appointmentSchema.parse(input))
+  .validator((input: unknown) => appointmentSchema.parse(input))
   .handler(async ({ data }) => {
     const supabase = createPublicServerClient();
     const { error } = await supabase.from("appointments").insert({
@@ -94,7 +94,7 @@ export const listLeads = createServerFn({ method: "POST" })
 
 export const updateLeadStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => statusSchema.parse(input))
+  .validator((input: unknown) => statusSchema.parse(input))
   .handler(async ({ data, context }) => {
     await assertStaff(context.supabase, context.userId);
 
